@@ -14,20 +14,14 @@
 //-------!!!!!------- Creates Global Header -------!!!!!-------
 
 
-// Creates the body
+// Declares the body
 var body = document.body;
-
 // Creates the header section
 var headerEl = document.createElement(`header`);
 headerEl.id = `header`;
-// Creates a box within the header
+// Creates a box to hold the Timer within the header
 var timerEl = document.createElement(`box`);
 timerEl.id = `timer`;
-
-// ----!!!----
-
-// Text Content
-timerEl.textContent = `Time Remaining: `;
 
 // ----!!!----
 
@@ -37,18 +31,12 @@ timerEl.textContent = `Time Remaining: `;
 body.appendChild(headerEl);
 headerEl.appendChild(timerEl);
 
-// ----!!!----
-
-// Styling
-timerEl.setAttribute(`style`, `border:solid 3px; background:#aaaaaa`);
-
 
 //-------!!!!!------- Creates a Timer -------!!!!!-------
 
-// --------!!!!!------ Only runs on time, need to add questions and else statement to end with questions
 
 function countdown() {
-    var timeLeft = 120;
+    var timeLeft = 3;
   
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
@@ -63,14 +51,31 @@ function countdown() {
         timerEl.textContent = timeLeft + ' second remaining';
         timeLeft--;
       } else {
-        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-        timerEl.textContent = '';
+        // Once `timeLeft` gets to 0, set `timerEl` to a string
+        timerEl.textContent = 'Out of Time!';
         // Use `clearInterval()` to stop the timer
         clearInterval(timeInterval);
       }
     }, 1000);
+
+    // Sets style around timer box
+    timerEl.setAttribute(`style`, `border:solid 3px; background:#aaaaaa`);
   }
 
+// Ends the timer when all questions have been answered
+// function endTimer() {
+//     var questionCount = 0;
+  
+//     // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
+//     var msgInterval = setInterval(function () {
+//       // If there are no more words left in the message
+//       if (questionsEl[questionCount] === undefined) {
+//         // Use `clearInterval()` to stop the timer
+//         clearInterval(msgInterval);
+//       }
+//     }, 1000);
+//   }
+  
 
 
 //-------!!!!!------- Creates Main Page -------!!!!!-------
@@ -95,26 +100,27 @@ var startEl = document.createElement(`div`);
 // Creates a start button
 var startButton = document.createElement(`button`);
 startButton.id = `start`;
-startButton.className = `colorPurple`;
+startButton.className = `btn`;
 startButton.innerHTML = `Start!`;
-// Makes the button hide the current container
-startButton.addEventListener(`click`, () =>{
-    if (container1El.style.display === `block`){
-        container1El.style.display = `none`;
-    } else {
-        container1El.style.display = `none`;
-    } 
-    // Calls countdown function on Start button press
-    countdown();
-});
-// Button displays hidden Question Page
-startButton.addEventListener(`click`, () =>{
-    if (container2El.style.display === `none`){
-        container2El.style.display = `block`;
-    } else {
-        container2El.style.display = `none`;
-    }
-});
+
+// // Start button hides the current container
+// startButton.addEventListener(`click`, () =>{
+//     if (container1El.style.display === `block`){
+//         container1El.style.display = `none`;
+//     } else {
+//         container1El.style.display = `none`;
+//     } 
+//     // Calls countdown function on Start button press
+//     countdown();
+// });
+// // Start button displays hidden Question Page
+// startButton.addEventListener(`click`, () =>{
+//     if (container2El.style.display === `none`){
+//         container2El.style.display = `block`;
+//     } else {
+//         container2El.style.display = `none`;
+//     }
+// });
 
 // ----!!!----
 
@@ -155,10 +161,6 @@ h1El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:c
 infoEl.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
 infoEl.setAttribute(`style`, `font-size:25px;`);
 
-// Class style
-document.querySelector(`.colorPurple`).setAttribute(`style`, 
-`font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
-
 
 //-------!!!!!------- Creates Question Page -------!!!!!-------
 
@@ -166,10 +168,11 @@ document.querySelector(`.colorPurple`).setAttribute(`style`,
 // Creates a second container around the body
 var container2El = document.createElement(`section`);
 container2El.id = `questions`;
+container2El.class = `hide`;
 // Creates the main section
 var mainEl = document.createElement(`main`);
-// Creates an H1 within the main
-var h1El = document.createElement(`h1`);
+// Creates an H2 within the main
+var h2El = document.createElement(`h2`);
 // Creates div to hold questions within the main
 var questionsEl = document.createElement(`div`);
 // Creates a paragraph with an array of questions within the questions div
@@ -177,50 +180,40 @@ var questionsArray = document.createElement(`p`);
 // Creates div to hold answers
 var answerEl = document.createElement(`div`);
 answerEl.id = `answer-buttons`;
-answerEl.className = `btn-grid`;
 
 // ----!!!----
 
 // Answers
 
-// Creates a button
+// Buttons
 var answer1 = document.createElement(`button`);
 answer1.id = `answer1`;
-answer1.className = `colorPurple`;
+answer1.className = `btn`;
 answer1.innerHTML = `Answer 1`;
 
 var answer2 = document.createElement(`button`);
 answer2.id = `answer2`;
-answer2.className = `colorPurple`;
+answer2.className = `btn`;
 answer2.innerHTML = `Answer 2`;
 
 var answer3 = document.createElement(`button`);
 answer3.id = `answer3`;
-answer3.className = `colorPurple`;
+answer3.className = `btn`;
 answer3.innerHTML = `Answer 3`;
 
 var answer4 = document.createElement(`button`);
 answer4.id = `answer4`;
-answer4.className = `colorPurple`;
+answer4.className = `btn`;
 answer4.innerHTML = `Answer 4`;
 
 // Create an event listener that uses a for loop to check
 // which answer was selected and look to see if it's the correct answer
 
-// Makes the button hide the current container
-// startButton.addEventListener(`click`, () =>{
-//     if (container2El.style.display === `none`){
-//         container2El.style.display = `block`;
-//     } else {
-//         container2El.style.display = `none`;
-//     }
-// });
-
 // ----!!!----
 
 // Text Content
 
-h1El.textContent = `Questions`;
+h2El.textContent = `Questions`;
 questionsArray.textContent = `lorem ipsum`;
 
 // ----!!!----
@@ -232,7 +225,7 @@ body.appendChild(container2El);
 // Appends the main within the container
 container2El.appendChild(mainEl);
 // Appends the H1 within the main
-mainEl.appendChild(h1El);
+mainEl.appendChild(h2El);
 // Appends a div into the main
 mainEl.appendChild(questionsEl);
 // Appends the quiz insructions to the div
@@ -249,42 +242,45 @@ answerEl.appendChild(answer4);
 
 // Styling
 
-container2El.setAttribute(`style`, `display:none;`);
-h1El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
+
+// ----!!!!---- Toggle comment off to have Start button function, Comment on to view page to work
+
+// container2El.setAttribute(`style`, `display:none;`);
+
+//----!!!!---- 
+
+
+h2El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
 questionsArray.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
 questionsArray.setAttribute(`style`, `font-size:25px; text-align:center;`);
-answerEl.setAttribute(`style`, `font-size:22px; padding:5px; margin-left:35px;`);
+answerEl.setAttribute(`style`, `display:grid; gap:10px; font-size:22px; padding:5px; margin:35px;`);
 
+// Creates a loop to style all button elements
+var button = document.querySelectorAll(`button`);
 
-answerEl.querySelector(`.colorPurple`).setAttribute(`style`, 
-`font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
-
-
-// Selects element by id
-// var timeEl = document.getElementById("header");
-
-// var secondsLeft = 120;
-
-// function setTime() {
-//   // Sets interval in variable
-//   var timerInterval = setInterval(function() {
-//     secondsLeft--;
-//     timeEl.timerEl = secondsLeft + " seconds left till colorsplosion.";
-
-//     if(secondsLeft === 0) {
-//       // Stops execution of action at set interval
-//       clearInterval(timerInterval);
-//       // Calls function to create and append image
-//       sendMessage();
-//     }
-
-//   }, 1000);
-// }
-
-// setTime();
-
+for (var i = 0; i < button.length; i++) {
+    button[i].setAttribute(`style`, `font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
+  }
 
 //-------!!!!!------- Creates Questions and Answers -------!!!!!-------
+
+
+
+startButton.addEventListener(`click`, startGame)
+
+
+function startGame() {
+    console.log(`Started`);
+    container1El.classList.add(`hide`);
+}
+
+function nextQuestion() {
+
+}
+
+function selectAnswer() {
+
+}
 
 
 // var questions = [
