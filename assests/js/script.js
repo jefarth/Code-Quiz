@@ -11,19 +11,74 @@
 // User can save initials with score after game over
 
 
-//-------!!!!!------- Creates Main Page -------!!!!!-------
+//-------!!!!!------- Creates Global Header -------!!!!!-------
 
 
 // Creates the body
 var body = document.body;
-// Creates a container around the body
-var container1El = document.createElement(`section`);
-// Declares an id on container1
-container1El.id = `home`;
+
 // Creates the header section
 var headerEl = document.createElement(`header`);
-// Declares an id on the header
 headerEl.id = `header`;
+// Creates a box within the header
+var timerEl = document.createElement(`box`);
+timerEl.id = `timer`;
+
+// ----!!!----
+
+// Text Content
+timerEl.textContent = `Time Remaining: `;
+
+// ----!!!----
+
+// Append Methods
+
+// Appends the header within the body
+body.appendChild(headerEl);
+headerEl.appendChild(timerEl);
+
+// ----!!!----
+
+// Styling
+timerEl.setAttribute(`style`, `border:solid 3px; background:#aaaaaa`);
+
+
+//-------!!!!!------- Creates a Timer -------!!!!!-------
+
+// --------!!!!!------ Only runs on time, need to add questions and else statement to end with questions
+
+function countdown() {
+    var timeLeft = 120;
+  
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+      // As long as the `timeLeft` is greater than 1
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timerEl` to show the remaining seconds
+        timerEl.textContent = `Time Remaining: ` + timeLeft + ' seconds';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timerEl.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+        timerEl.textContent = '';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+      }
+    }, 1000);
+  }
+
+
+
+//-------!!!!!------- Creates Main Page -------!!!!!-------
+
+
+// Creates a container around the body
+var container1El = document.createElement(`section`);
+container1El.id = `home`;
 // Creates the main section
 var mainEl = document.createElement(`main`);
 // Creates an H1
@@ -40,7 +95,7 @@ var startEl = document.createElement(`div`);
 // Creates a start button
 var startButton = document.createElement(`button`);
 startButton.id = `start`;
-startButton.className = `buttonEl`;
+startButton.className = `colorPurple`;
 startButton.innerHTML = `Start!`;
 // Makes the button hide the current container
 startButton.addEventListener(`click`, () =>{
@@ -48,7 +103,9 @@ startButton.addEventListener(`click`, () =>{
         container1El.style.display = `none`;
     } else {
         container1El.style.display = `none`;
-    }
+    } 
+    // Calls countdown function on Start button press
+    countdown();
 });
 // Button displays hidden Question Page
 startButton.addEventListener(`click`, () =>{
@@ -69,14 +126,11 @@ Try to answer all the questions as best as you can within the time limit.
 Any missed questions will result in a time reduction penalty. 
 Once all questions are answered or time runs out, 
 your score will be talied and hosted on the leaderboards at the end.`;
-headerEl.textContent = `Time Remaining: `;
 
 // ----!!!----
 
 // Append Methods
 
-// Appends the header within the body
-body.appendChild(headerEl);
 // Appends the container within the body
 body.appendChild(container1El);
 // Appends the main within the container
@@ -87,7 +141,7 @@ mainEl.appendChild(h1El);
 mainEl.appendChild(instructionEl);
 // Appends the quiz insructions to the instruction div
 instructionEl.appendChild(infoEl);
-// Appends start div to the page
+// Appends button div to the page
 container1El.appendChild(startEl);
 // Appends button to the button div
 startEl.appendChild(startButton);
@@ -99,10 +153,10 @@ startEl.appendChild(startButton);
 body.setAttribute(`style`, `background:#005990;`);
 h1El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
 infoEl.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
-infoEl.setAttribute(`style`, `font-size:25px; text-align:center;`);
+infoEl.setAttribute(`style`, `font-size:25px;`);
 
 // Class style
-document.querySelector(`.buttonEl`).setAttribute(`style`, 
+document.querySelector(`.colorPurple`).setAttribute(`style`, 
 `font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
 
 
@@ -111,11 +165,9 @@ document.querySelector(`.buttonEl`).setAttribute(`style`,
 
 // Creates a second container around the body
 var container2El = document.createElement(`section`);
-// Declares an id on container2
 container2El.id = `questions`;
 // Creates the main section
 var mainEl = document.createElement(`main`);
-
 // Creates an H1 within the main
 var h1El = document.createElement(`h1`);
 // Creates div to hold questions within the main
@@ -124,6 +176,8 @@ var questionsEl = document.createElement(`div`);
 var questionsArray = document.createElement(`p`);
 // Creates div to hold answers
 var answerEl = document.createElement(`div`);
+answerEl.id = `answer-buttons`;
+answerEl.className = `btn-grid`;
 
 // ----!!!----
 
@@ -132,22 +186,22 @@ var answerEl = document.createElement(`div`);
 // Creates a button
 var answer1 = document.createElement(`button`);
 answer1.id = `answer1`;
-answer1.className = `buttonEl`;
+answer1.className = `colorPurple`;
 answer1.innerHTML = `Answer 1`;
 
 var answer2 = document.createElement(`button`);
 answer2.id = `answer2`;
-answer2.className = `buttonEl`;
+answer2.className = `colorPurple`;
 answer2.innerHTML = `Answer 2`;
 
 var answer3 = document.createElement(`button`);
 answer3.id = `answer3`;
-answer3.className = `buttonEl`;
+answer3.className = `colorPurple`;
 answer3.innerHTML = `Answer 3`;
 
 var answer4 = document.createElement(`button`);
 answer4.id = `answer4`;
-answer4.className = `buttonEl`;
+answer4.className = `colorPurple`;
 answer4.innerHTML = `Answer 4`;
 
 // Create an event listener that uses a for loop to check
@@ -201,26 +255,21 @@ questionsArray.setAttribute(`style`, `margin:auto; width:50%; text-align:center;
 questionsArray.setAttribute(`style`, `font-size:25px; text-align:center;`);
 answerEl.setAttribute(`style`, `font-size:22px; padding:5px; margin-left:35px;`);
 
-answerEl.querySelector(`.buttonEl`).setAttribute(`style`, 
+
+answerEl.querySelector(`.colorPurple`).setAttribute(`style`, 
 `font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
 
 
-// -----------!!!!!!!!!!!!-----------
-
-
-// // Creates a Timer
-
-
-// // Selects element by id
+// Selects element by id
 // var timeEl = document.getElementById("header");
 
-// var secondsLeft = 10;
+// var secondsLeft = 120;
 
 // function setTime() {
 //   // Sets interval in variable
 //   var timerInterval = setInterval(function() {
 //     secondsLeft--;
-//     timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+//     timeEl.timerEl = secondsLeft + " seconds left till colorsplosion.";
 
 //     if(secondsLeft === 0) {
 //       // Stops execution of action at set interval
@@ -233,3 +282,122 @@ answerEl.querySelector(`.buttonEl`).setAttribute(`style`,
 // }
 
 // setTime();
+
+
+//-------!!!!!------- Creates Questions and Answers -------!!!!!-------
+
+
+// var questions = [
+//     {
+//       question: "What is the capital of Germany?",
+//       answers: [
+//         {text: "Amsterdam"},
+//         {text: "Berlin", isCorrect: true},
+//         {text: "Prague"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Morocco?",
+//       answers: [
+//         {text: "Nouakchott"},
+//         {text: "Rabat", isCorrect: true},
+//         {text: "Tripoli"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Estonia?",
+//       answers: [
+//         {text: "Riga"},
+//         {text: "Tallinn", isCorrect: true},
+//         {text: "Vilnius"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Australia?",
+//       answers: [
+//         {text: "Canberra", isCorrect: true},
+//         {text: "Melbourne"},
+//         {text: "Sydney"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Canada?",
+//       answers: [
+//         {text: "Ottawa", isCorrect: true},
+//         {text: "Toronto"},
+//         {text: "Vancouver"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Paraguay?",
+//       answers: [
+//         {text: "Asunción", isCorrect: true},
+//         {text: "La Paz"},
+//         {text: "Montevideo"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Vietnam?",
+//       answers: [
+//         {text: "Hanoi", isCorrect: true},
+//         {text: "Ho Chi Minh City"},
+//         {text: "Phnom Penh"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of India?",
+//       answers: [
+//         {text: "Bangalore"},
+//         {text: "Bombay"},
+//         {text: "New Delhi", isCorrect: true},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Iraq?",
+//       answers: [
+//         {text: "Baghdad", isCorrect: true},
+//         {text: "Damas"},
+//         {text: "Tehran"},
+//       ]
+//     },
+//     {
+//       question: "What is the capital of Colombia?",
+//       answers: [
+//         {text: "Bogotá", isCorrect: true},
+//         {text: "Caracas"},
+//         {text: "Quito"},
+//       ]
+//     },
+//   ];
+//   var score = 0;
+//   var iQuestion = 0;
+  
+//   function updateQuestionAndScore() {
+//     if (iQuestion >= questions.length) {
+//       document.getElementsByClassName('question')[0].outerHTML = '';
+//       document.getElementsByClassName('answer')[2].outerHTML = '';
+//       document.getElementsByClassName('answer')[1].outerHTML = '';
+//       document.getElementsByClassName('answer')[0].outerHTML = '';
+//       return;
+//     }
+//     document.getElementsByClassName('score')[0].innerHTML = score;  
+//     document.getElementsByClassName('question')[0].innerHTML = questions[iQuestion].question;
+//     var answers = document.getElementsByClassName('answer');
+//     for (let i = 0; i < answers.length; i++) {
+//       answers[i].innerHTML = questions[iQuestion].answers[i].text;
+//     }
+//   }
+  
+//   document.addEventListener("DOMContentLoaded", function(event) { 
+//     var answers = document.getElementsByClassName('answer');
+//     for (let i = 0; i < answers.length; i++) {
+//       answers[i].onclick = function() {
+//         if (questions[iQuestion].answers[i].isCorrect) {
+//           score++;
+//         }
+//         iQuestion++;
+//         updateQuestionAndScore();
+//       }
+//     }
+//     updateQuestionAndScore();
+//   });
