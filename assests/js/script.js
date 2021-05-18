@@ -15,12 +15,12 @@
 
 
 // Declares the body
-var body = document.body;
+const body = document.body;
 // Creates the header section
-var headerEl = document.createElement(`header`);
+const headerEl = document.createElement(`header`);
 headerEl.id = `header`;
 // Creates a box to hold the Timer within the header
-var timerEl = document.createElement(`box`);
+const timerEl = document.createElement(`box`);
 timerEl.id = `timer`;
 
 // ----!!!----
@@ -36,10 +36,10 @@ headerEl.appendChild(timerEl);
 
 
 function countdown() {
-    var timeLeft = 3;
+    let timeLeft = 120;
   
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function () {
+    let timeInterval = setInterval(function () {
       // As long as the `timeLeft` is greater than 1
       if (timeLeft > 1) {
         // Set the `textContent` of `timerEl` to show the remaining seconds
@@ -77,28 +77,27 @@ function countdown() {
 //   }
   
 
-
 //-------!!!!!------- Creates Main Page -------!!!!!-------
 
 
 // Creates a container around the body
-var container1El = document.createElement(`section`);
+const container1El = document.createElement(`section`);
 container1El.id = `home`;
 // Creates the main section
 var mainEl = document.createElement(`main`);
 // Creates an H1
 var h1El = document.createElement(`h1`);
 // Creates div to hold instructions for the quiz within the main
-var instructionEl = document.createElement(`div`);
+const instructionEl = document.createElement(`div`);
 // Creates a paragraph with quiz instructions within the instruction div
-var infoEl = document.createElement(`p`);
+const infoEl = document.createElement(`p`);
 // Creates div to hold button
-var startEl = document.createElement(`div`);
+const startEl = document.createElement(`div`);
 
 // ----!!!----
 
 // Creates a start button
-var startButton = document.createElement(`button`);
+const startButton = document.createElement(`button`);
 startButton.id = `start`;
 startButton.className = `btn`;
 startButton.innerHTML = `Start!`;
@@ -174,11 +173,11 @@ var mainEl = document.createElement(`main`);
 // Creates an H2 within the main
 var h2El = document.createElement(`h2`);
 // Creates div to hold questions within the main
-var questionsEl = document.createElement(`div`);
+const questionsEl = document.createElement(`div`);
 // Creates a paragraph with an array of questions within the questions div
-var questionsArray = document.createElement(`p`);
+const questionsArray = document.createElement(`p`);
 // Creates div to hold answers
-var answerEl = document.createElement(`div`);
+const answerEl = document.createElement(`div`);
 answerEl.id = `answer-buttons`;
 
 // ----!!!----
@@ -186,22 +185,22 @@ answerEl.id = `answer-buttons`;
 // Answers
 
 // Buttons
-var answer1 = document.createElement(`button`);
+const answer1 = document.createElement(`button`);
 answer1.id = `answer1`;
 answer1.className = `btn`;
 answer1.innerHTML = `Answer 1`;
 
-var answer2 = document.createElement(`button`);
+const answer2 = document.createElement(`button`);
 answer2.id = `answer2`;
 answer2.className = `btn`;
 answer2.innerHTML = `Answer 2`;
 
-var answer3 = document.createElement(`button`);
+const answer3 = document.createElement(`button`);
 answer3.id = `answer3`;
 answer3.className = `btn`;
 answer3.innerHTML = `Answer 3`;
 
-var answer4 = document.createElement(`button`);
+const answer4 = document.createElement(`button`);
 answer4.id = `answer4`;
 answer4.className = `btn`;
 answer4.innerHTML = `Answer 4`;
@@ -253,10 +252,10 @@ answerEl.appendChild(answer4);
 h2El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
 questionsArray.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
 questionsArray.setAttribute(`style`, `font-size:25px; text-align:center;`);
-answerEl.setAttribute(`style`, `display:grid; gap:10px; font-size:22px; padding:5px; margin:35px;`);
+answerEl.setAttribute(`style`, `display:grid; gap:10px; font-size:22px; padding:5px; ; border:solid; ;`);
 
 // Creates a loop to style all button elements
-var button = document.querySelectorAll(`button`);
+const button = document.querySelectorAll(`button`);
 
 for (var i = 0; i < button.length; i++) {
     button[i].setAttribute(`style`, `font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
@@ -264,7 +263,11 @@ for (var i = 0; i < button.length; i++) {
 
 //-------!!!!!------- Creates Questions and Answers -------!!!!!-------
 
+const containerEl = document.querySelectorAll(`container`);
 
+for (var i = 0; i < containerEl.length; i++) {
+    containerEl[i].setAttribute(`style`, `display:none`);
+  }
 
 startButton.addEventListener(`click`, startGame)
 
@@ -272,6 +275,7 @@ startButton.addEventListener(`click`, startGame)
 function startGame() {
     console.log(`Started`);
     container1El.classList.add(`hide`);
+    container2El.classList.remove(`hide`);
 }
 
 function nextQuestion() {
