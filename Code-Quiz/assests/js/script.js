@@ -10,6 +10,9 @@
 // Create a function to keep track of score
 // User can save initials with score after game over
 
+//-------!!!!!------- Global Variables -------!!!!!-------
+
+
 
 //-------!!!!!------- Creates Global Header -------!!!!!-------
 
@@ -159,6 +162,7 @@ body.setAttribute(`style`, `background:#005990;`);
 h1El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
 infoEl.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
 infoEl.setAttribute(`style`, `font-size:25px;`);
+startEl.setAttribute(`style`, `margin-left:35px;`);
 
 
 //-------!!!!!------- Creates Question Page -------!!!!!-------
@@ -174,8 +178,6 @@ var mainEl = document.createElement(`main`);
 var h2El = document.createElement(`h2`);
 // Creates div to hold questions within the main
 const questionsEl = document.createElement(`div`);
-// Creates a paragraph with an array of questions within the questions div
-const questionsArray = document.createElement(`p`);
 // Creates div to hold answers
 const answerEl = document.createElement(`div`);
 answerEl.id = `answer-buttons`;
@@ -213,7 +215,6 @@ answer4.innerHTML = `Answer 4`;
 // Text Content
 
 h2El.textContent = `Questions`;
-questionsArray.textContent = `lorem ipsum`;
 
 // ----!!!----
 
@@ -227,8 +228,6 @@ container2El.appendChild(mainEl);
 mainEl.appendChild(h2El);
 // Appends a div into the main
 mainEl.appendChild(questionsEl);
-// Appends the quiz insructions to the div
-questionsEl.appendChild(questionsArray);
 // Appends answer div to the page
 container2El.appendChild(answerEl);
 // Appends answer buttons to the answer div
@@ -242,40 +241,41 @@ answerEl.appendChild(answer4);
 // Styling
 
 
-// ----!!!!---- Toggle comment off to have Start button function, Comment on to view page to work
+// --------!!!!--------
+//  Toggle below comment off to have Start button function, Comment on to view page to work
 
 // container2El.setAttribute(`style`, `display:none;`);
 
-//----!!!!---- 
+//--------!!!!-------- 
 
 
-h2El.setAttribute(`style`, `margin:auto; width:50%; font-size:40px; text-align:center;`);
-questionsArray.setAttribute(`style`, `margin:auto; width:50%; text-align:center;`);
-questionsArray.setAttribute(`style`, `font-size:25px; text-align:center;`);
-answerEl.setAttribute(`style`, `display:grid; gap:10px; font-size:22px; padding:5px; ; border:solid; ;`);
-
+h2El.setAttribute(`style`, `margin:0 auto; width:50%; font-size:40px; text-align:center;`);
+answerEl.setAttribute(`style`, `display:grid; gap:10px; font-size:22px; border:solid; width:25%; margin:0 auto;  padding:5px;`);
 // Creates a loop to style all button elements
 const button = document.querySelectorAll(`button`);
 
 for (var i = 0; i < button.length; i++) {
-    button[i].setAttribute(`style`, `font-size:22px; padding:5px; margin-left:35px; background:#58058d;`);
+    button[i].setAttribute(`style`, `font-size:22px; padding:5px; background:#58058d;`);
   }
 
 //-------!!!!!------- Creates Questions and Answers -------!!!!!-------
 
-const containerEl = document.querySelectorAll(`container`);
+const hideEl = document.getElementsByClassName(`hide`);
+hideEl.setAttribute(`style`, `display:none`);
 
-for (var i = 0; i < containerEl.length; i++) {
-    containerEl[i].setAttribute(`style`, `display:none`);
-  }
+// Loops through all the containers to 
+// for (var i = 0; i < containerEl.length; i++) {
+//     containerEl[i].setAttribute(`style`, `display:none`);
+//   }
 
-startButton.addEventListener(`click`, startGame)
+startButton.addEventListener(`click`, startGame());
 
 
 function startGame() {
     console.log(`Started`);
     container1El.classList.add(`hide`);
     container2El.classList.remove(`hide`);
+    nextQuestion()
 }
 
 function nextQuestion() {
